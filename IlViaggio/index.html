@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Il Viaggio - Rivista di arte e cultura</title>
+        
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+
+		<link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/flexslider.css">
+
+		<script type="text/javascript" src="js/jquery-1.10.1.js"></script>
+        
+        <script type="text/javascript" src="js/jquery.flexslider.js"></script>
+        
+		<script type="text/javascript">
+		
+			var flexslider=false;
+		
+			$(window).load(function() {
+			
+			//flexslider
+			if (document.documentElement.clientWidth >= 768) {
+				$("#slide1").append("<a href='#'><img src='img/flexslider/1.png' class='slide'></a>");
+				$("#slide1").append("<p class='flex-caption'><a href='#'>Lorem ipsum dolor sit</a></p>")
+				
+				$("#slide2").append("<a href='#'><img src='img/flexslider/2.png' class='slide'></a>");
+				$("#slide2").append("<p class='flex-caption'><a href='#'>Lorem ipsum dolor sit</a></p>")
+				
+				$("#slide3").append("<a href='#'><img src='img/flexslider/3.png' class='slide'></a>");
+				$("#slide3").append("<p class='flex-caption'><a href='#'>Lorem ipsum dolor sit</a></p>")
+				
+				$("#slide4").append("<a href='#'><img src='img/flexslider/4.png' class='slide'></a>");
+				$("#slide4").append("<p class='flex-caption'><a href='#'>Lorem ipsum dolor sit</a></p>")
+				
+				$("#slide5").append("<a href='#'><img src='img/flexslider/5.png' class='slide'></a>");
+				$("#slide5").append("<p class='flex-caption'><a href='#'>Lorem ipsum dolor sit</a></p>")
+				
+				$('.flexslider').flexslider({
+					animation: 'slide'
+		  		});
+				
+				flexslider=true;
+			}
+			
+		  console.log("PIPPO");
+		  
+		  //caricamento immagini responsive
+		  if (window.matchMedia("(min-width: 768px)").matches) {
+			  $("article[class='post'] h2").each(function(){
+				  console.log($(this).attr("data-src"));
+				  $(this).after("<img alt='alt' src='"+$(this).attr("data-src")+".jpg'>");
+			  });
+		  } else {
+			  $("article[class='post'] h2").each(function(){
+				  console.log($(this).attr("data-src"));
+				  $(this).after("<img alt='alt' src='"+$(this).attr("data-src")+"_small.jpg'>");
+			  });
+		  }
+		});
+		
+		$(window).resize(function() {
+  			if (document.documentElement.clientWidth >= 768) {
+				if (flexslider==false) {
+					console.log("FLEXISLIDER");
+					$("#slide1").append("<a href='#'><img src='img/flexslider/1.png' class='slide'></a>");
+					$("#slide1").append("<p class='flex-caption'><a href='#'>Lorem ipsum dolor sit</a></p>")
+					
+					$("#slide2").append("<a href='#'><img src='img/flexslider/2.png' class='slide'></a>");
+					$("#slide2").append("<p class='flex-caption'><a href='#'>Lorem ipsum dolor sit</a></p>")
+					
+					$("#slide3").append("<a href='#'><img src='img/flexslider/3.png' class='slide'></a>");
+					$("#slide3").append("<p class='flex-caption'><a href='#'>Lorem ipsum dolor sit</a></p>")
+					
+					$("#slide4").append("<a href='#'><img src='img/flexslider/4.png' class='slide'></a>");
+					$("#slide4").append("<p class='flex-caption'><a href='#'>Lorem ipsum dolor sit</a></p>")
+					
+					$("#slide5").append("<a href='#'><img src='img/flexslider/5.png' class='slide'></a>");
+					$("#slide5").append("<p class='flex-caption'><a href='#'>Lorem ipsum dolor sit</a></p>")
+					
+					$('.flexslider').flexslider({
+						animation: 'slide'
+					});
+					
+					flexslider=true;
+				}
+				
+				
+				$("article[class='post'] h2").each(function(){
+				  console.log($(this).attr("data-src"));
+				  $(this).next("img").remove();
+				  $(this).after("<img alt='alt' src='"+$(this).attr("data-src")+".jpg'>");
+			  	});
+				
+			} else {
+				$("article[class='post'] h2").each(function(){
+				  console.log($(this).attr("data-src"));
+				  $(this).next("img").remove();
+				  $(this).after("<img alt='alt' src='"+$(this).attr("data-src")+"_small.jpg'>");
+			  	});
+			}
+		});
+		
+		</script>
+<!-- Formattazione menu per il mobile -->
+<script type="text/javascript">
+$(function() {
+  var collapsed = true;
+  $('nav>h2').click(function() {
+    collapsed = !collapsed;
+    formatSidebar();
+  });
+  $(window).resize(formatSidebar);
+  formatSidebar();
+
+  function formatSidebar() {
+    if ($(window).width() > 767) {
+      $('nav').removeClass('collapsible');
+      $('nav ul#menu-principale').show();
+    } else {
+      $('nav').addClass('collapsible');
+      if (collapsed) { 
+        $('nav ul#menu-principale').hide("fast");
+        $('nav > h2').removeClass('minus');
+      } else {
+        $('nav ul#menu-principale').show("fast");
+        $('nav > h2').addClass('minus');
+      }
+    }
+  };
+});
+</script>
+<!-- Fine formattazione menu per il mobile -->
+	</head>
+
+	<body>
+		<div id="container">
+			<header>
+				<!-- Inizio sezione logo -->
+				<div id="logo">
+					<img alt="logo" src="img/global/logo.png">
+				</div>
+				<!-- Fine sezione logo -->
+				<!-- Inizio navigazione principale -->
+				<nav>
+					<h2>Sezioni</h2>
+					<ul class="menu" id="menu-principale">
+						<li id="home">
+							<a href="#">Home</a>
+						</li>
+						<li id="viaggi">
+							<a href="#">Viaggi</a>
+						</li>
+						<li id="natura">
+							<a href="#">Natura</a>
+						</li>
+						<li id="culture">
+							<a href="#">Culture</a>
+						</li>
+						<li id="fotografia">
+							<a href="#">Fotografia</a>
+						</li>
+						<li id="esplorazioni">
+							<a href="#">Esplorazioni</a>
+						</li>
+						<li id="news">
+							<a href="#">News</a>
+						</li>
+					</ul>
+				</nav>
+				<!-- Fine navigazione principale -->
+			</header>
+
+			<!-- Fine header -->
+
+			<!-- Inizio slideshow contenuti in evidenza -->
+            <div id="inevidenza" class="flexslider">
+              <ul class="slides">
+                <li id="slide1">
+                </li>
+                <li id="slide2">
+                </li>
+                <li id="slide3">
+                </li>
+                <li id="slide4">
+                </li>
+                <li id="slide5">
+                </li>
+              </ul>
+            </div>
+            <!-- Fine slideshow contenuti in evidenza -->
+
+			<!-- Inizio #main (contenuti principali) -->
+			<div id="main">
+				<!-- Inizio sezione ultimi 5 articoli -->
+				<article class="post" id="post-1">
+					<time datetime="2012-03-22">
+						22 Marzo 2012
+					</time>
+					<h2 data-src="img/articoli/pompieri"><a href="#">Gli eroi di New York</a></h2>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+						eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+						ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+						aliquip ex ea commodo consequat.
+					</p>
+				</article>
+				<article class="post" id="post-2">
+					<time datetime="2012-03-21">
+						21 Marzo 2012
+					</time>
+					<h2 data-src="img/articoli/ccbl"><a href="#">Arte contemporanea a Lisbona</a></h2>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+						eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+						ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+						aliquip ex ea commodo consequat.
+					</p>
+				</article>
+				<article class="post" id="post-3">
+					<time datetime="2012-03-18">
+						18 Marzo 2012
+					</time>
+					<h2 data-src="img/articoli/katz"><a href="#">I migliori sandwich di New York</a></h2>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+						eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+						ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+						aliquip ex ea commodo consequat.
+					</p>
+				</article>
+				<article class="post" id="post-4">
+					<time datetime="2012-03-16">
+						16 Marzo 2012
+					</time>
+					<h2 data-src="img/articoli/arles"><a href="#">Sprazzi di Spagna in Provenza</a></h2>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+						eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+						ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+						aliquip ex ea commodo consequat.
+					</p>
+				</article>
+				<!-- Fine sezione ultimi 5 articoli -->
+			</div>
+			<!-- Fine #main (contenuti principali) -->
+			<!-- Inizio contenuti secondari -->
+			<aside id="primaria">
+				<!-- Inizio box di ricerca -->
+				<div id="ricerca">
+					<input id="search" name="search" placeholder="Cerca..." type="text">
+					<input id="button" name="button" type="submit" value="Vai">
+				</div>
+				<!-- Fine box di ricerca -->
+				<!-- Inizio link e icone social -->
+				<div class="widget social-widget" id="social">
+					<ul>
+						<li>
+							<a href="#" id="twitter">Seguici su Twitter</a>
+						</li>
+						<li>
+							<a href="#" id="facebook">Seguici su Facebook</a>
+						</li>
+						<li>
+							<a href="#" id="mailinglist">Mailing list</a>
+						</li>
+						<li>
+							<a href="#" id="feed">Feed RSS</a>
+						</li>
+					</ul>
+				</div>
+				<!-- Fine link e icone social -->
+				<!-- Inizio sezione ultimi commenti -->
+				<div class="widget ultimi-commenti-widget" id="ultimi-commenti">
+					<h3>Ultimi commenti</h3>
+					<div class="commenti">
+						<ul class="lista-commenti">
+							<li>
+								<span class="autore-commenti"><a href="#">Lucio
+									Rossi</a></span>: <span class="testo-commenti">Lorem ipsum sit to
+									take us into lunch. Excited about working with them on the next
+									phase of the site</span>
+							</li>
+							<li>
+								<span class="autore-commenti"><a href="#">Carlo
+									Bianchi</a></span>: <span class="testo-commenti">Lorem ipsum sit to
+									take us into lunch. Excited about working with them on the next
+									phase of the site</span>
+							</li>
+							<li>
+								<span class="autore-commenti"><a href="#">Sandra
+									Verdi</a></span>: <span class="testo-commenti">Lorem ipsum sit to
+									take us into lunch. Excited about working with them on the next
+									phase of the site</span>
+							</li>
+							<li>
+								<span class="autore-commenti"><a href="#">Lucio
+									Rossi</a></span>: <span class="testo-commenti">Lorem ipsum sit to
+									take us into lunch. Excited about working with them on the next
+									phase of the site</span>
+							</li>
+							<li>
+								<span class="autore-commenti"><a href="#">Carlo
+									Bianchi</a></span>: <span class="testo-commenti">Lorem ipsum sit to
+									take us into lunch. Excited about working with them on the next
+									phase of the site</span>
+							</li>
+							<li>
+								<span class="autore-commenti"><a href="#">Sandra
+									Verdi</a></span>: <span class="testo-commenti">Lorem ipsum sit to
+									take us into lunch. Excited about working with them on the next
+									phase of the site</span>
+							</li>
+							<li>
+								<span class="autore-commenti"><a href="#">Lucio
+									Rossi</a></span>: <span class="testo-commenti">Lorem ipsum sit to
+									take us into lunch. Excited about working with them on the next
+									phase of the site</span>
+							</li>
+							<li>
+								<span class="autore-commenti"><a href="#">Carlo
+									Bianchi</a></span>: <span class="testo-commenti">Lorem ipsum sit to
+									take us into lunch. Excited about working with them on the next
+									phase of the site</span>
+							</li>
+							<li>
+								<span class="autore-commenti"><a href="#">Sandra
+									Verdi</a></span>: <span class="testo-commenti">Lorem ipsum sit to
+									take us into lunch. Excited about working with them on the next
+									phase of the site</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- Fine sezione ultimi commenti -->
+			</aside>
+
+			<aside id="secondaria">
+				<!-- Inizio sezione categorie e tag -->
+				<div class="widget categorie-widget" id="categorie">
+					<h3>Citt&agrave;</h3>
+					<ul>
+						<li>
+							<a href="#">New York</a>
+						</li>
+						<li>
+							<a href="#">Parigi</a>
+						</li>
+						<li>
+							<a href="#">Londra</a>
+						</li>
+						<li>
+							<a href="#">Madrid</a>
+						</li>
+						<li>
+							<a href="#">Tel Aviv</a>
+						</li>
+						<li>
+							<a href="#">Rotterdam</a>
+						</li>
+						<li>
+							<a href="#">Anversa</a>
+						</li>
+						<li>
+							<a href="#">Las Vegas</a>
+						</li>
+						<li>
+							<a href="#">Seattle</a>
+						</li>
+						<li>
+							<a href="#">Montreal</a>
+						</li>
+						<li>
+							<a href="#">Edimburgo</a>
+						</li>
+						<li>
+							<a href="#">Milano</a>
+						</li>
+						<li>
+							<a href="#">Los Angeles</a>
+						</li>
+						<li>
+							<a href="#">Vienna</a>
+						</li>
+						<li>
+							<a href="#">Tallinn</a>
+						</li>
+						<li>
+							<a href="#">Stoccolma</a>
+						</li>
+					</ul>
+					<h3>Regioni</h3>
+					<ul>
+						<li>
+							<a href="#">Andalusia</a>
+						</li>
+						<li>
+							<a href="#">Galizia</a>
+						</li>
+						<li>
+							<a href="#">Minho e Beiras</a>
+						</li>
+						<li>
+							<a href="#">Ticino e Grigioni</a>
+						</li>
+						<li>
+							<a href="#">Highlands scozzesi</a>
+						</li>
+						<li>
+							<a href="#">Terre del Mare</a>
+						</li>
+						<li>
+							<a href="#">Borgogna</a>
+						</li>
+						<li>
+							<a href="#">Fiandra</a>
+						</li>
+						<li>
+							<a href="#">Normandia</a>
+						</li>
+						<li>
+							<a href="#">Grandi Laghi</a>
+						</li>
+						<li>
+							<a href="#">Altipiani africani</a>
+						</li>
+						<li>
+							<a href="#">Cornovaglia</a>
+						</li>
+						<li>
+							<a href="#">Steppa caucasica</a>
+						</li>
+						<li>
+							<a href="#">Cappadocia</a>
+						</li>
+						<li>
+							<a href="#">Bretagna</a>
+						</li>
+						<li>
+							<a href="#">Fiordi norvegesi</a>
+						</li>
+					</ul>
+				</div>
+				<!-- Fine sezione categorie e tag -->
+			</aside>
+			<!-- Fine contenuti secondari -->
+			<!-- Inizio informazioni di supporto (footer) -->
+			<footer>
+				<ul id="legal">
+					<li>
+						&copy; Il Viaggio: info@ilviaggio.it
+					</li>
+					<li>
+						Tel/fax: <a href="tel:+3906123456789">+3906123456789</a>
+					</li>
+					<li>
+						<a href="#">Info legali</a>
+					</li>
+				</ul>
+			</footer>
+			<!-- Fine informazioni di supporto (footer) -->
+
+		</div>
+		<!--! Fine #container -->
+	</body>
+</html>
