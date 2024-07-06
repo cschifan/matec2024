@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["utenteCorrente"])) {
+    header("Location: login.php");
+    exit();
+} else {
+    $utente=$_SESSION["utenteCorrente"];
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,6 +63,13 @@
       <div class="row beige">
         <div class="col"><h1 class="text-center">Il mio negozio</h1></div>
       </div>
+      <div class="row beige">
+        <div class="col-3 offset-9">
+            <p>Ciao <?php echo $utente ?> 
+                <a href="do_logout.php" class="btn btn-primary">Logout</a>
+            </p>
+        </div>
+      </div>
       <div class="row">
         <div class="col">
           <nav class="navbar navbar-expand-md bg-light">
@@ -75,12 +94,12 @@
                     <a
                       class="nav-link active"
                       aria-current="page"
-                      href="index.html"
+                      href="index.php"
                       >Home</a
                     >
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="prodotti.html">Prodotti</a>
+                    <a class="nav-link" href="prodotti.php">Prodotti</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link disabled" href="pagina3.html"

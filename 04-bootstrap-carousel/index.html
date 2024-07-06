@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test bootstrap</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <style>
+      .rosso {
+        background-color: red;
+      }
+
+      .verde {
+        background-color: green;
+      }
+    </style>
+    <script></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6 offset-3">
+          <div
+            id="mioCarousel"
+            class="carousel slide carousel-fade"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  src="https://picsum.photos/600/200?random=1"
+                  class="d-block w-100"
+                  alt="Prima immagine"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="https://picsum.photos/600/200?random=2"
+                  class="d-block w-100"
+                  alt="Seconda immagine"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="https://picsum.photos/600/200?random=3"
+                  class="d-block w-100"
+                  alt="Terza immagine"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="https://picsum.photos/600/200?random=4"
+                  class="d-block w-100"
+                  alt="Prima immagine"
+                />
+              </div>
+            </div>
+            <div class="carousel-indicators">
+              <button
+                type="button"
+                data-bs-target="#mioCarousel"
+                data-bs-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#mioCarousel"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#mioCarousel"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#mioCarousel"
+                data-bs-slide-to="3"
+                aria-label="Slide 4"
+              ></button>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#mioCarousel"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#mioCarousel"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      id="bstop"
+      type="button"
+      class="btn btn-primary ms-5"
+      onclick="stop(event)"
+    >
+      Stop
+    </button>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let c = "ciao";
+      document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+          console.log("content ready!");
+          c = document.getElementById("mioCarousel");
+          c.setAttribute("data-bs-interval", 1000);
+          c.setAttribute("data-bs-pause", "hover");
+
+          c.addEventListener("slide.bs.carousel", (event) => {
+            console.log("transition start!");
+            console.log(event.from);
+          });
+          c.addEventListener("slid.bs.carousel", (event) => {
+            console.log("transition stop!");
+          });
+        },
+        false
+      );
+
+      let stop = function (event) {
+        console.log("stop");
+        console.log(event.timeStamp);
+        bootstrap.Carousel.getInstance(c).pause();
+      };
+
+      document.getElementById("bstop").addEventListener("click", stop);
+    </script>
+  </body>
+</html>

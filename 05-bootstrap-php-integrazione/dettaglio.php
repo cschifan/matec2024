@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["utenteCorrente"])) {
+    header("Location: login.php");
+    exit();
+} else {
+    $utente=$_SESSION["utenteCorrente"];
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,6 +63,13 @@
       <div class="row beige">
         <div class="col"><h1 class="text-center">Il mio negozio</h1></div>
       </div>
+      <div class="row beige">
+        <div class="col-3 offset-9">
+            <p>Ciao <?php echo $utente ?> 
+                <a href="do_logout.php" class="btn btn-primary">Logout</a>
+            </p>
+        </div>
+      </div>
       <div class="row">
         <div class="col">
           <nav class="navbar navbar-expand-md bg-light">
@@ -72,15 +91,12 @@
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a
-                      class="nav-link active"
-                      aria-current="page"
-                      href="index.html"
+                    <a class="nav-link" aria-current="page" href="index.php"
                       >Home</a
                     >
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="prodotti.html">Prodotti</a>
+                    <a class="nav-link active" href="prodotti.php">Prodotti</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link disabled" href="pagina3.html"
@@ -95,40 +111,35 @@
       </div>
       <div class="row">
         <div class="col-md-9 col-sm-12">
-          <h1>Il mio negozio</h1>
-          <p class="giustificato">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </p>
-          <p class="giustificato">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </p>
-          <p class="giustificato">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </p>
+          <?php
+            $id=$_GET["id"]; 
+          
+            $host = "localhost";
+            $username = "root";
+            $password = "root";
+            $db = "negozio";
+
+            $conn = new mysqli($host, $username, $password, $db);
+
+            $query = "SELECT * FROM prodotti where id=$id;";
+            $result = $conn->query($query);
+
+            $ntuple = mysqli_num_rows($result);
+            $tupla = $result->fetch_assoc();
+            
+            if ($ntuple==1) {
+              $nomeprodotto = $tupla["nome"];
+              $descrprodotto = $tupla["descrizione"];
+              $nomefile = $tupla["fileimmagine"];
+            }
+
+          ?>
+          <h1>Il dettaglio del prodotto</h1>
+          <p>Nome: <?php echo $nomeprodotto?></p>
+          <p>Descrizione: <?php echo $descrprodotto?></p>
+          <div>
+            <img src="<?php echo $nomefile ?>" alt="img-fluid img-thumbnail rounded mx-auto d-block">
+          </div>
         </div>
         <div class="col-md-3 d-none d-md-block">
           <div class="card mx-auto mb-2" style="width: 12rem">
